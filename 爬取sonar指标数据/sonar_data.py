@@ -16,8 +16,8 @@ data_url = 'https://xxx.cn/api/measures/search?projectKeys=situation%3Aactivity1
 headers = {
            "user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
            }
-name_response = requests.get(name_url,headers=headers,auth=('tianyong','w979111986...')).content.decode()
-data_response = requests.get(data_url,headers=headers,auth=('tianyong','w979111986...')).content.decode()
+name_response = requests.get(name_url,headers=headers,auth=('username','password')).content.decode()
+data_response = requests.get(data_url,headers=headers,auth=('username','password')).content.decode()
 
 #  1. 创建文件对象
 f = open('ty.csv', 'w', encoding='utf-8-sig')
