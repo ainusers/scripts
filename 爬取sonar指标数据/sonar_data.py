@@ -10,9 +10,9 @@ import csv
 # target: 爬取sonar指标数据
 
 # 获取组件名称
-name_url = 'https://sonar-biz.qianxin-inc.cn/api/components/search_projects?ps=50&facets=reliability_rating%2Csecurity_rating%2Csqale_rating%2Ccoverage%2Cduplicated_lines_density%2Cncloc%2Calert_status%2Clanguages%2Ctags&f=analysisDate%2CleakPeriodDate'
+name_url = 'https://xxx.cn/api/components/search_projects?ps=50&facets=reliability_rating%2Csecurity_rating%2Csqale_rating%2Ccoverage%2Cduplicated_lines_density%2Cncloc%2Calert_status%2Clanguages%2Ctags&f=analysisDate%2CleakPeriodDate'
 # 获取指标数据
-data_url = 'https://sonar-biz.qianxin-inc.cn/api/measures/search?projectKeys=situation%3Aactivity1%2Ccssa%3Ademo%2Cemergency%3Aemergency1%2Cgovernance%3Agovernance1%2Csituation%3Aleo1%2Csituation%3AdataGraph1%2Cnotice%3Anotice1%2Csituation%3Aorchestration1%2Csituation%3Aplan1%2Csituation%3Aresource1%2CTSGZ%3Ascene-v1%2CTSGZ%3Asiriusv1%2Csirius%3Asdk1%2CdataReport%3AdataReport1%2Csituation%3Acertification1%2Ctransfer%3Atransfer1%2Cssc%3Aapi%2Cssc%3Aspark%2Cssc%3A1012%2Cbisheng%3Abisheng1%2Cintegrated%3Aintegrated1%2Csafety-monitor%3Asafety-monitor1%2Csituation%3Aspeech%2Csisconfig%3Asisconfig&metricKeys=alert_status%2Cbugs%2Creliability_rating%2Cvulnerabilities%2Csecurity_rating%2Ccode_smells%2Csqale_rating%2Cduplicated_lines_density%2Ccoverage%2Cncloc%2Cncloc_language_distribution'
+data_url = 'https://xxx.cn/api/measures/search?projectKeys=situation%3Aactivity1%2Ccssa%3Ademo%2Cemergency%3Aemergency1%2Cgovernance%3Agovernance1%2Csituation%3Aleo1%2Csituation%3AdataGraph1%2Cnotice%3Anotice1%2Csituation%3Aorchestration1%2Csituation%3Aplan1%2Csituation%3Aresource1%2CTSGZ%3Ascene-v1%2CTSGZ%3Asiriusv1%2Csirius%3Asdk1%2CdataReport%3AdataReport1%2Csituation%3Acertification1%2Ctransfer%3Atransfer1%2Cssc%3Aapi%2Cssc%3Aspark%2Cssc%3A1012%2Cbisheng%3Abisheng1%2Cintegrated%3Aintegrated1%2Csafety-monitor%3Asafety-monitor1%2Csituation%3Aspeech%2Csisconfig%3Asisconfig&metricKeys=alert_status%2Cbugs%2Creliability_rating%2Cvulnerabilities%2Csecurity_rating%2Ccode_smells%2Csqale_rating%2Cduplicated_lines_density%2Ccoverage%2Cncloc%2Cncloc_language_distribution'
 headers = {
            "user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
            }
@@ -40,7 +40,7 @@ for name in json.loads(name_response)['components']:
                 list.append(data['value'])
                 # bug详情
                 if(bag == 0):
-                    bug_url = 'https://sonar-biz.qianxin-inc.cn/api/issues/search?componentKeys='+ name['key'] +'&s=FILE_LINE&resolved=false&types=BUG&ps=100&organization=default-organization&facets=severities,types&additionalFields=_all'
+                    bug_url = 'https://xxx.cn/api/issues/search?componentKeys='+ name['key'] +'&s=FILE_LINE&resolved=false&types=BUG&ps=100&organization=default-organization&facets=severities,types&additionalFields=_all'
                     bug_detail = requests.get(bug_url, headers=headers, auth=('tianyong', 'w979111986...')).content.decode()
                     for bags in json.loads(bug_detail)['facets'][0]['values']:
                         if (bags['val'] == 'CRITICAL'):
@@ -52,7 +52,7 @@ for name in json.loads(name_response)['components']:
                 list.append(data['value'])
                 # 异味详情
                 if (yiwei == 0):
-                    yiwei_url = 'https://sonar-biz.qianxin-inc.cn/api/issues/search?componentKeys=' + name['key'] + '&s=FILE_LINE&resolved=false&types=CODE_SMELL&ps=100&organization=default-organization&facets=severities,types&additionalFields=_all'
+                    yiwei_url = 'https://xxx.cn/api/issues/search?componentKeys=' + name['key'] + '&s=FILE_LINE&resolved=false&types=CODE_SMELL&ps=100&organization=default-organization&facets=severities,types&additionalFields=_all'
                     yiwei_detail = requests.get(yiwei_url, headers=headers, auth=('tianyong', 'w979111986...')).content.decode()
                     for yiweis in json.loads(yiwei_detail)['facets'][0]['values']:
                         if (yiweis['val'] == 'CRITICAL'):
@@ -70,7 +70,7 @@ for name in json.loads(name_response)['components']:
                 list.append(data['value'])
                 # 漏洞详情
                 if (loudong == 0):
-                    loudong_url = 'https://sonar-biz.qianxin-inc.cn/api/issues/search?componentKeys=' + name['key'] + '&s=FILE_LINE&resolved=false&types=VULNERABILITY&ps=100&organization=default-organization&facets=severities,types&additionalFields=_all'
+                    loudong_url = 'https://xxx.cn/api/issues/search?componentKeys=' + name['key'] + '&s=FILE_LINE&resolved=false&types=VULNERABILITY&ps=100&organization=default-organization&facets=severities,types&additionalFields=_all'
                     loudong_detail = requests.get(loudong_url, headers=headers, auth=('tianyong', 'w979111986...')).content.decode()
                     for loudongs in json.loads(loudong_detail)['facets'][0]['values']:
                         if (loudongs['val'] == 'CRITICAL'):
